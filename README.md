@@ -1,2 +1,1 @@
 # recycler-flutter
-саламалейкум
