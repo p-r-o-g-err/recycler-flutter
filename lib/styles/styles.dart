@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recycler_flutter_app/main.dart';
+import 'package:recycler_flutter_app/values/Colors.dart';
 
 final loginPlatesDecorationStyle = BoxDecoration(
   color: Colors.white,
@@ -7,9 +8,14 @@ final loginPlatesDecorationStyle = BoxDecoration(
   boxShadow: [
     BoxShadow(
       color: Colors.black12,
-      blurRadius: 20,
+      blurRadius: 10,
       offset: Offset(0,2)
     )
   ]
+);
+var loginPlateTextStyle = TextStyle(
+  color: colorsMainTextColor,
+  fontFamily: 'OpenSans',
+  fontSize: 20,
 
 );

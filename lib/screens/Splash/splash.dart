@@ -17,35 +17,35 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: mainColor,
         body: Stack(
-          children: <Widget>[
-            Container(
-              child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 100),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              "lib/assets/images/logo.svg",
-                              color: Colors.white,
-                              width: 100,
-                              height: 100,
-                            )
-                          ]),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      LoginPlate()
-                    ],
-                  )),
-            )
-          ],
-        ));
+      children: <Widget>[
+        Container(
+          color: colorsMainColor,
+        ),
+        Container(
+          child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 100),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    SvgPicture.asset(
+                      "lib/assets/images/logo.svg",
+                      color: Colors.white,
+                      width: 100,
+                      height: 100,
+                    )
+                  ]),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  LoginPlate()
+                ],
+              )),
+        )
+      ],
+    ));
   }
 }
 
@@ -62,7 +62,7 @@ class _loginPlateState extends State<LoginPlate> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Your login"),
+          Text("Имя пользователя", style: loginPlateTextStyle),
           SizedBox(height: 10),
           Container(
               decoration: loginPlatesDecorationStyle,
@@ -74,7 +74,7 @@ class _loginPlateState extends State<LoginPlate> {
                 decoration: InputDecoration(border: InputBorder.none),
               )),
           SizedBox(height: 10),
-          Text("Your password"),
+          Text("Пароль", style: loginPlateTextStyle),
           SizedBox(height: 10),
           Container(
               decoration: loginPlatesDecorationStyle,
