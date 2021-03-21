@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:recycler_flutter_app/screens/HomePage/home.dart';
 import 'package:recycler_flutter_app/values/Colors.dart';
 import 'package:recycler_flutter_app/styles/styles.dart';
 
 class Splash extends StatefulWidget {
-  final String nextRoute;
-
-  @override
-  Splash({this.nextRoute});
-
   State<StatefulWidget> createState() => _SplashState();
 }
 
@@ -84,7 +80,15 @@ class _loginPlateState extends State<LoginPlate> {
                 maxLines: 1,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(border: InputBorder.none),
-              ))
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          FlatButton(
+              onPressed: () {
+                toHomePage(context);
+              },
+              child: Text("LOG IN"))
         ],
       ),
     );
@@ -99,4 +103,9 @@ class LoadingPlate extends StatelessWidget {
     // TODO: implement build
     throw UnimplementedError();
   }
+}
+
+void toHomePage(BuildContext context) {
+  Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (BuildContext context) => Home()));
 }

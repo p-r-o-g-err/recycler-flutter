@@ -5,19 +5,15 @@ import 'package:recycler_flutter_app/screens/HomePage/home.dart';
 
 void main() => runApp(recyclerApplication());
 
-class recyclerApplication extends StatelessWidget{
-  final routes = <String , WidgetBuilder>{
-    '/HomePage' : (BuildContext context) => Home()
-  };
-
-
-
+class recyclerApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:
-        Splash(nextRoute: '/HomePage'),
-      routes: routes,
+      routes: {
+        '/login': (BuildContext context) => Splash(),
+        '/home': (BuildContext context) => Home()
+      },
+      initialRoute: '/home',
     );
   }
 }
