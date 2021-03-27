@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -9,38 +13,58 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Completer<GoogleMapController> _controller = Completer();
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  GoogleMapController _mapController;
+  static final LatLng _tyumenCenter = LatLng(57.151327, 65.53716);
+  LatLng _lastMapPos = _tyumenCenter;
+  final Set<Marker> _markers = {};
+  BitmapDescriptor _markerIcon;
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  @override
+  void initState() {
+    super.initState();
+    getBytesFromAsset('assets/images/009-recycle.png', 64).then((onValue) {
+      _markerIcon = BitmapDescriptor.fromBytes(onValue);
+    });
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+    setState(() {
+      _markers.add(
+        Marker(
+            markerId: MarkerId("00000"),
+            position: _lastMapPos,
+            infoWindow: InfoWindow(title: "TITLE", snippet: "Snippet"),
+            icon: _markerIcon),
+      );
+    });
+  }
+
+  void _setMarkerIcon() async {
+    _markerIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(100, 100)),
+        'assets/images/009-recycle.png');
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+        mapType: MapType.normal,
+        initialCameraPosition: CameraPosition(target: _tyumenCenter, zoom: 13),
+        onMapCreated: _onMapCreated,
+        markers: _markers,
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  static Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    Codec codec = await instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ImageByteFormat.png))
+        .buffer
+        .asUint8List();
   }
 }

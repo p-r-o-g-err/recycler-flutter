@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
         body: Stack(
       children: <Widget>[
         Container(
-          color: colorsMainColor,
+          color: mainGreen,
         ),
         Container(
           child: SingleChildScrollView(

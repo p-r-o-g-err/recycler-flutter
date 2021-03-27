@@ -14,7 +14,7 @@ final loginPlatesDecorationStyle = BoxDecoration(
   ]
 );
 var loginPlateTextStyle = TextStyle(
-  color: colorsMainTextColor,
+  color: textMainColor,
   fontFamily: 'OpenSans',
   fontSize: 20,
 
