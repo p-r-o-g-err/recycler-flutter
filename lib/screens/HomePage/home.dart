@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
   void _setMarkerIcon() async {
     _markerIcon = BitmapDescriptor.fromBytes(
         await ImagesUtils.getBytesFromPngAsset(
-            'lib/assets/images/markers/009-recycle.png', 100));
+            'lib/assets/images/markers/009-recycle.png', Size(50, 50)));
   }
 
   @override
