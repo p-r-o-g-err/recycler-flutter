@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:recycler_flutter_app/screens/Splash/splash.dart';
 import 'package:recycler_flutter_app/screens/HomePage/home.dart';
 
-void main() => runApp(recyclerApplication());
+void main() => runApp(RecyclerApplication());
 
-class recyclerApplication extends StatelessWidget {
+class RecyclerApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -1,9 +1,8 @@
 import 'dart:collection';
-import 'dart:typed_data';
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:recycler_flutter_app/enums/PlaceType.dart';
 import 'package:recycler_flutter_app/utils/ImagesUtils.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -40,7 +39,7 @@ class _HomeState extends State<Home> {
   void _setMarkerIcon() async {
     _markerIcon = BitmapDescriptor.fromBytes(
         await ImagesUtils.getBytesFromPngAsset(
-            'lib/assets/images/markers/009-recycle.png', Size(50, 50)));
+            'lib/assets/images/markers/009-recycle.png', Size(, 50)));
   }
 
   @override
